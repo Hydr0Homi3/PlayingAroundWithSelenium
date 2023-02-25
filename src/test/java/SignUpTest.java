@@ -25,7 +25,7 @@ public class SignUpTest {
         // add firstName, lastName, phoneNumber, unique/random emailAddress to the sign-up form
         String lastName = "Kubala";
         int randomNumber = (int) (Math.random()*1000);
-        String email = "test" + randomNumber + "@test.pl";
+        String email = "testJakub" + randomNumber + "@testing.pl";
         driver.findElement(By.name("firstname")).sendKeys("Jakub");
         driver.findElement(By.name("lastname")).sendKeys(lastName);
         driver.findElement(By.name("phone")).sendKeys("111111111");
