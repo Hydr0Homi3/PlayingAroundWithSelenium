@@ -49,10 +49,16 @@ public class HotelSearchPage {
         checkkoutInput.sendKeys(checkout);
     }
 
-    public void setTravellers() {
+    public void setTravellers(int adultsToAdd, int childToAdd) {
         travellersInput.click();
-        adultPlusBtn.click();
-        childPlusBtn.click();
+        addTraveler(adultPlusBtn, adultsToAdd);
+        addTraveler(childPlusBtn,childToAdd);
+    }
+
+    private void addTraveler(WebElement travellerBtn, int numberOfTravellers) {
+        for (int i = 0; i < numberOfTravellers; i++){
+            travellerBtn.click();
+        }
     }
 
     public void performSearch() {
