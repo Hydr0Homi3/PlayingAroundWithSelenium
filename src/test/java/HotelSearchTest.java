@@ -16,9 +16,13 @@ public class HotelSearchTest {
         driver.manage().window().maximize();
         driver.get("http://www.kurs-selenium.pl/demo/");
 
-        // searching for a city
+        // searching for & setting the city
         driver.findElement(By.xpath("//span[text()='Search by Hotel or City Name']")).click();
         driver.findElement(By.xpath("//div[@id='select2-drop']//input")).sendKeys("Dubai");
         driver.findElement(By.xpath("//span[@class='select2-match' and text()='Dubai']")).click();
+
+        // searching for and setting the date
+        driver.findElement(By.name("checkin")).sendKeys("17/04/2023");
+        driver.findElement(By.name("checkout")).sendKeys("20/04/2023");
     }
 }
