@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -22,10 +23,18 @@ public class SignUpTest {
         driver.findElements(By.xpath("//a[text()='  Sign Up']")).get(1).click();
 
         // add firstName, lastName, phoneNumber, emailAddress to the sign-up form
+        String lastName = "Kubala";
         driver.findElement(By.name("firstname")).sendKeys("Jakub");
-        driver.findElement(By.name("lastname")).sendKeys("Kubala");
-        driver.findElement(By.name("phone")).sendKeys("668048049");
-        driver.findElement(By.name("email")).sendKeys("jk432@vp.pl");
+        driver.findElement(By.name("lastname")).sendKeys(lastName);
+        driver.findElement(By.name("phone")).sendKeys("111111111");
+        driver.findElement(By.name("email")).sendKeys("jk11111132@vp.pl");
+
+        // add password to the sign-up form, click sign up and check if we get to the signed user page
+        driver.findElement(By.name("password")).sendKeys("Test123");
+        driver.findElement(By.name("confirmpassword")).sendKeys("Test123");
+        driver.findElement(By.xpath("//button[text()=' Sign Up']")).click();
+        WebElement heading = driver.findElement(By.xpath("//h3[@class='RTL']"));
+        Assert.assertTrue(heading.getText().contains(lastName));
 
 
     }
