@@ -27,8 +27,8 @@ public class NoHotelNameSearchTest {
         driver.findElement(By.xpath("//button[text()=' Search']")).click();
 
         // check if the No result found massage was displayed
-        WebElement heading = driver.findElement(By.xpath("//h2[text()='No Results Found']"));
-        Assert.assertEquals(heading.getText(), "No Results Found");
-        Assert.assertTrue(heading.getText().contains("No Results"));
+        WebElement noResultHeading = driver.findElement(By.xpath("//div[@class='itemscontainer']//h2"));
+        Assert.assertTrue(noResultHeading.isDisplayed());
+        Assert.assertEquals(noResultHeading.getText(), "No Results Found");
     }
 }
