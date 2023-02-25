@@ -17,8 +17,16 @@ public class SignUpTest {
         driver.manage().window().maximize();
         driver.get("http://www.kurs-selenium.pl/demo/");
 
-        // opening the sign up form
+        // opening the sign-up form
         driver.findElements(By.xpath("//li[@id='li_myaccount']")).stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
         driver.findElements(By.xpath("//a[text()='  Sign Up']")).get(1).click();
+
+        // add firstName, lastName, phoneNumber, emailAddress to the sign-up form
+        driver.findElement(By.name("firstname")).sendKeys("Jakub");
+        driver.findElement(By.name("lastname")).sendKeys("Kubala");
+        driver.findElement(By.name("phone")).sendKeys("668048049");
+        driver.findElement(By.name("email")).sendKeys("jk432@vp.pl");
+
+
     }
 }
