@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class SignUpEmptyFormTest {
-    // sign up with no data to evaluate if the correct errors are displayed
+    // sign up with empty form to evaluate if the correct errors are displayed
     @Test
     public void signUpEmptyForm() {
         WebDriverManager.chromedriver().setup();
