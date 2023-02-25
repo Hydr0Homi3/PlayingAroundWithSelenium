@@ -2,11 +2,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class HotelSearchTest {
 
@@ -32,11 +32,16 @@ public class HotelSearchTest {
         driver.findElement(By.id("adultPlusBtn")).click();
         driver.findElement(By.id("childPlusBtn")).click();
 
-        // click on a search button, get list of hotel names and check if we got hotelNames list by checking the size
+        // click on a search button and get list of hotel names
         driver.findElement(By.xpath("//button[text()=' Search']")).click();
         List<String> hotelNames = driver.findElements(By.xpath("//h4[contains(@class,'list_title')]//b")).stream()
-                                                                                                                        .map(el -> el.getText())
-                                                                                                                        .collect(Collectors.toList());
-        System.out.println(hotelNames.size());
+                .map(el -> el.getAttribute("textContent")).toList();
+
+
+        // check if the hotel names match the names in the list
+        Assert.assertEquals("Jumeirah Beach Hotel", hotelNames.get(0));
+        Assert.assertEquals("Oasis Beach Tower", hotelNames.get(1));
+        Assert.assertEquals("Rose Rayhaan Rotana", hotelNames.get(2));
+        Assert.assertEquals("Hyatt Regency Perth", hotelNames.get(3));
     }
 }
