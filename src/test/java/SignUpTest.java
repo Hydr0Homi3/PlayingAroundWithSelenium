@@ -22,12 +22,14 @@ public class SignUpTest {
         driver.findElements(By.xpath("//li[@id='li_myaccount']")).stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
         driver.findElements(By.xpath("//a[text()='  Sign Up']")).get(1).click();
 
-        // add firstName, lastName, phoneNumber, emailAddress to the sign-up form
+        // add firstName, lastName, phoneNumber, unique/random emailAddress to the sign-up form
         String lastName = "Kubala";
+        int randomNumber = (int) (Math.random()*1000);
+        String email = "test" + randomNumber + "@test.pl";
         driver.findElement(By.name("firstname")).sendKeys("Jakub");
         driver.findElement(By.name("lastname")).sendKeys(lastName);
         driver.findElement(By.name("phone")).sendKeys("111111111");
-        driver.findElement(By.name("email")).sendKeys("jk11111132@vp.pl");
+        driver.findElement(By.name("email")).sendKeys(email);
 
         // add password to the sign-up form, click sign up and check if we get to the signed user page
         driver.findElement(By.name("password")).sendKeys("Test123");
