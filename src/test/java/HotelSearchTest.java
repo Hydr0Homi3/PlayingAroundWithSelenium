@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class HotelSearchTest {
 
@@ -29,5 +31,12 @@ public class HotelSearchTest {
         driver.findElement(By.id("travellersInput")).click();
         driver.findElement(By.id("adultPlusBtn")).click();
         driver.findElement(By.id("childPlusBtn")).click();
+
+        // click on a search button, get list of hotel names and check if we got hotelNames list by checking the size
+        driver.findElement(By.xpath("//button[text()=' Search']")).click();
+        List<String> hotelNames = driver.findElements(By.xpath("//h4[contains(@class,'list_title')]//b")).stream()
+                                                                                                                        .map(el -> el.getText())
+                                                                                                                        .collect(Collectors.toList());
+        System.out.println(hotelNames.size());
     }
 }
