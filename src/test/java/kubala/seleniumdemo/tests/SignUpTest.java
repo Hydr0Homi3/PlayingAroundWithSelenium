@@ -14,7 +14,7 @@ public class SignUpTest extends BaseTest {
     public void signUpTest() {
 
         String lastName = "Kijania";
-        int randomNumber = (int) (Math.random()*1000);
+        int randomNumber = (int) (Math.random() * 1000);
 
         LoggedUserPage loggedUserPage = new HotelSearchPage(driver)
                 .openSignUpForm()
@@ -27,9 +27,8 @@ public class SignUpTest extends BaseTest {
                 .signUp();
 
         Assert.assertTrue(loggedUserPage.getHeadingText().contains(lastName));
-        Assert.assertEquals(loggedUserPage.getHeadingText(),"Hi, Piotr Kijania");
+        Assert.assertEquals(loggedUserPage.getHeadingText(), "Hi, Piotr Kijania");
     }
-
 
 
     @Test

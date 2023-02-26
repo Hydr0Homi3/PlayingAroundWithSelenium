@@ -50,7 +50,7 @@ public class HotelSearchPage {
     public HotelSearchPage setCity(String cityName) {
         searchHotelSpan.click();
         searchHotelInput.sendKeys(cityName);
-        String xpath = String.format("//span[@class='select2-match' and text()='%s']",cityName);
+        String xpath = String.format("//span[@class='select2-match' and text()='%s']", cityName);
         driver.findElement(By.xpath(xpath)).click();
         return this;
     }
@@ -64,12 +64,12 @@ public class HotelSearchPage {
     public HotelSearchPage setTravellers(int adultsToAdd, int childToAdd) {
         travellersInput.click();
         addTraveler(adultPlusBtn, adultsToAdd);
-        addTraveler(childPlusBtn,childToAdd);
+        addTraveler(childPlusBtn, childToAdd);
         return this;
     }
 
     private void addTraveler(WebElement travellerBtn, int numberOfTravellers) {
-        for (int i = 0; i < numberOfTravellers; i++){
+        for (int i = 0; i < numberOfTravellers; i++) {
             travellerBtn.click();
         }
     }
