@@ -36,6 +36,25 @@ public class SignUpTest extends BaseTest {
     }
 
     @Test
+    public void signUpTestAfterRefactor() {
+
+        String lastName = "Kijania";
+        int randomNumber = (int) (Math.random()*1000);
+        String email = "testPiotr" + randomNumber + "@testing.pl";
+
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
+        hotelSearchPage.openSignUpForm();
+
+        SignUpPage signUpPage = new SignUpPage(driver);
+        signUpPage.fillSignUpForm("Piotr", lastName,"123456789", email, "Haslo123");
+
+        LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
+
+        Assert.assertTrue(loggedUserPage.getHeadingText().contains(lastName));
+        Assert.assertEquals(loggedUserPage.getHeadingText(),"Hi, Piotr Kijania");
+    }
+
+    @Test
     public void signUpEmptyFormTest() {
 
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
