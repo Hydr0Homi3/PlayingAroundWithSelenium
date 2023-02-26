@@ -1,5 +1,7 @@
 package kubala.seleniumdemo.pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,35 +44,37 @@ public class HotelSearchPage {
 
     private WebDriver driver;
 
+    private static final Logger logger = LogManager.getLogger();
+
     public HotelSearchPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
     public HotelSearchPage setCity(String cityName) {
-        System.out.println("Setting city: " + cityName);
+        logger.info("Setting city: " + cityName);
         searchHotelSpan.click();
         searchHotelInput.sendKeys(cityName);
         String xpath = String.format("//span[@class='select2-match' and text()='%s']", cityName);
         driver.findElement(By.xpath(xpath)).click();
-        System.out.println("Setting city done");
+        logger.info("Setting city done");
         return this;
     }
 
     public HotelSearchPage setDates(String checkin, String checkout) {
-        System.out.println("Setting dates, check-in: " + checkin + " ,check-out: " + checkout);
+        logger.info("Setting dates, check-in: " + checkin + " ,check-out: " + checkout);
         checkinInput.sendKeys(checkin);
         checkkoutInput.sendKeys(checkout);
-        System.out.println("Setting dates done");
+        logger.info("Setting dates done");
         return this;
     }
 
     public HotelSearchPage setTravellers(int adultsToAdd, int childToAdd) {
-        System.out.println("Setting travellers, adults: " + adultsToAdd + " ,children: " + childToAdd);
+        logger.info("Setting travellers, adults: " + adultsToAdd + " ,children: " + childToAdd);
         travellersInput.click();
         addTraveler(adultPlusBtn, adultsToAdd);
         addTraveler(childPlusBtn, childToAdd);
-        System.out.println("Setting travellers done");
+        logger.info("Setting travellers done");
         return this;
     }
 
@@ -81,9 +85,9 @@ public class HotelSearchPage {
     }
 
     public ResultsPage performSearch() {
-        System.out.println("Performing search");
+        logger.info("Performing search");
         searchButton.click();
-        System.out.println("Performing search done");
+        logger.info("Performing search done");
         return new ResultsPage(driver);
     }
 
