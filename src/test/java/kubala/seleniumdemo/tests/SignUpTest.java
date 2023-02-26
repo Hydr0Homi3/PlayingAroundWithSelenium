@@ -1,5 +1,6 @@
 package kubala.seleniumdemo.tests;
 
+import kubala.seleniumdemo.model.User;
 import kubala.seleniumdemo.pages.HotelSearchPage;
 import kubala.seleniumdemo.pages.LoggedUserPage;
 import kubala.seleniumdemo.pages.SignUpPage;
@@ -42,15 +43,23 @@ public class SignUpTest extends BaseTest {
         int randomNumber = (int) (Math.random()*1000);
         String email = "testPiotr" + randomNumber + "@testing.pl";
 
+        User user = new User();
+        user.setFirstName("Piotr");
+        user.setLastName("Kijania");
+        user.setPhone("123456789");
+        user.setEmail(email);
+        user.setPassword("Haslo123");
+
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.openSignUpForm();
 
         SignUpPage signUpPage = new SignUpPage(driver);
-        signUpPage.fillSignUpForm("Piotr", lastName,"123456789", email, "Haslo123");
+        //signUpPage.fillSignUpForm("Piotr", lastName,"123456789", email, "Haslo123");
+        signUpPage.fillSignUpFormWithUser(user);
 
         LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
 
-        Assert.assertTrue(loggedUserPage.getHeadingText().contains(lastName));
+        Assert.assertTrue(loggedUserPage.getHeadingText().contains(user.getLastName()));
         Assert.assertEquals(loggedUserPage.getHeadingText(),"Hi, Piotr Kijania");
     }
 

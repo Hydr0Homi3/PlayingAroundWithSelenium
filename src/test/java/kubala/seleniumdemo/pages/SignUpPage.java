@@ -1,5 +1,6 @@
 package kubala.seleniumdemo.pages;
 
+import kubala.seleniumdemo.model.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -78,6 +79,16 @@ public class SignUpPage {
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         confirmPasswordInput.sendKeys(password);
+        signUpButton.click();
+    }
+
+    public void fillSignUpFormWithUser(User user) {
+        firstNameInput.sendKeys(user.getFirstName());
+        lastNameInput.sendKeys(user.getLastName());
+        phoneInput.sendKeys(user.getPhone());
+        emailInput.sendKeys(user.getEmail());
+        passwordInput.sendKeys(user.getPassword());
+        confirmPasswordInput.sendKeys(user.getPassword());
         signUpButton.click();
     }
 
