@@ -1,6 +1,5 @@
 package kubala.seleniumdemo.tests;
 
-import kubala.seleniumdemo.model.User;
 import kubala.seleniumdemo.pages.HotelSearchPage;
 import kubala.seleniumdemo.pages.LoggedUserPage;
 import kubala.seleniumdemo.pages.SignUpPage;
@@ -16,59 +15,27 @@ public class SignUpTest extends BaseTest {
 
         String lastName = "Kijania";
         int randomNumber = (int) (Math.random()*1000);
-        String email = "testPiotr" + randomNumber + "@testing.pl";
 
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.openSignUpForm();
-
-        SignUpPage signUpPage = new SignUpPage(driver);
-        signUpPage.setFirstName("Piotr");
-        signUpPage.setLastName(lastName);
-        signUpPage.setPhone("123456789");
-        signUpPage.setEmail(email);
-        signUpPage.setPassword("Haslo123");
-        signUpPage.confirmPassword("Haslo123");
-        signUpPage.signUp();
-
-        LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
+        LoggedUserPage loggedUserPage = new HotelSearchPage(driver)
+                .openSignUpForm()
+                .setFirstName("Piotr")
+                .setLastName(lastName)
+                .setPhone("123456789")
+                .setEmail("testPiotr" + randomNumber + "@testing.pl")
+                .setPassword("Haslo123")
+                .confirmPassword("Haslo123")
+                .signUp();
 
         Assert.assertTrue(loggedUserPage.getHeadingText().contains(lastName));
         Assert.assertEquals(loggedUserPage.getHeadingText(),"Hi, Piotr Kijania");
     }
 
-    @Test
-    public void signUpTestAfterRefactor() {
 
-        String lastName = "Kijania";
-        int randomNumber = (int) (Math.random()*1000);
-        String email = "testPiotr" + randomNumber + "@testing.pl";
-
-        User user = new User();
-        user.setFirstName("Piotr");
-        user.setLastName("Kijania");
-        user.setPhone("123456789");
-        user.setEmail(email);
-        user.setPassword("Haslo123");
-
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.openSignUpForm();
-
-        SignUpPage signUpPage = new SignUpPage(driver);
-        //signUpPage.fillSignUpForm("Piotr", lastName,"123456789", email, "Haslo123");
-        signUpPage.fillSignUpFormWithUser(user);
-
-        LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
-
-        Assert.assertTrue(loggedUserPage.getHeadingText().contains(user.getLastName()));
-        Assert.assertEquals(loggedUserPage.getHeadingText(),"Hi, Piotr Kijania");
-    }
 
     @Test
     public void signUpEmptyFormTest() {
 
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.openSignUpForm();
-        SignUpPage signUpPage = new SignUpPage(driver);
+        SignUpPage signUpPage = new HotelSearchPage(driver).openSignUpForm();
         signUpPage.signUp();
         List<String> errors = signUpPage.getErrors();
 
@@ -84,16 +51,14 @@ public class SignUpTest extends BaseTest {
     @Test
     public void invalidEmailSignUpTest() {
 
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.openSignUpForm();
-
-        SignUpPage signUpPage = new SignUpPage(driver);
-        signUpPage.setFirstName("Piotr");
-        signUpPage.setLastName("Kijania");
-        signUpPage.setPhone("123456789");
-        signUpPage.setEmail("email");
-        signUpPage.setPassword("Haslo123");
-        signUpPage.confirmPassword("Haslo123");
+        SignUpPage signUpPage = new HotelSearchPage(driver)
+                .openSignUpForm()
+                .setFirstName("Piotr")
+                .setLastName("Kijania")
+                .setPhone("123456789")
+                .setEmail("email")
+                .setPassword("Haslo123")
+                .confirmPassword("Haslo123");
         signUpPage.signUp();
 
         Assert.assertTrue(signUpPage.getErrors().contains("The Email field must contain a valid email address."));
