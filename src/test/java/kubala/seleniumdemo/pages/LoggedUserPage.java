@@ -11,7 +11,6 @@ public class LoggedUserPage {
     private WebElement heading;
 
 
-
     public LoggedUserPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }

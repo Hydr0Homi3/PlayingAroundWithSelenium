@@ -15,7 +15,7 @@ public class SignUpTest extends BaseTest {
     public void signUpTest() {
 
         String lastName = "Kijania";
-        int randomNumber = (int) (Math.random()*1000);
+        int randomNumber = (int) (Math.random() * 1000);
         String email = "testPiotr" + randomNumber + "@testing.pl";
 
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
@@ -33,14 +33,14 @@ public class SignUpTest extends BaseTest {
         LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
 
         Assert.assertTrue(loggedUserPage.getHeadingText().contains(lastName));
-        Assert.assertEquals(loggedUserPage.getHeadingText(),"Hi, Piotr Kijania");
+        Assert.assertEquals(loggedUserPage.getHeadingText(), "Hi, Piotr Kijania");
     }
 
     @Test
     public void signUpTestAfterRefactor() {
 
         String lastName = "Kijania";
-        int randomNumber = (int) (Math.random()*1000);
+        int randomNumber = (int) (Math.random() * 1000);
         String email = "testPiotr" + randomNumber + "@testing.pl";
 
         User user = new User();
@@ -60,7 +60,7 @@ public class SignUpTest extends BaseTest {
         LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
 
         Assert.assertTrue(loggedUserPage.getHeadingText().contains(user.getLastName()));
-        Assert.assertEquals(loggedUserPage.getHeadingText(),"Hi, Piotr Kijania");
+        Assert.assertEquals(loggedUserPage.getHeadingText(), "Hi, Piotr Kijania");
     }
 
     @Test
